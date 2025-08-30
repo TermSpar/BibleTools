@@ -15,7 +15,7 @@ body {
     background: var(--bg-main);
     color: var(--text-default);
     margin: 0;
-    font-family: 'Segoe UI', Consolas, 'Courier New', monospace;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
 }
 
 .container {
@@ -35,13 +35,19 @@ body {
     color: var(--accent-blue);
     margin-bottom: 20px;
     letter-spacing: 0.5px;
+    text-align: center;
 }
 
 /* Navigation */
+nav {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
 nav a {
     display: inline-block;
     padding: 10px 18px;
-    margin: 0 8px;
+    margin: 5px;
     color: var(--text-default);
     background: var(--bg-input);
     border-radius: 6px;
@@ -94,10 +100,11 @@ h2 {
     background: var(--bg-main);
     border: 1px solid var(--border-gray);
     border-radius: 4px;
-    padding: 4px 8px;
+    padding: 4px 6px;
     color: var(--text-default);
-    font-size: 0.95em;
-    min-width: 70px;
+    font-size: 0.9em;
+    min-width: 60px;
+    max-width: 90px;
     transition: border 0.2s, box-shadow 0.2s;
 }
 
@@ -118,7 +125,7 @@ h2 {
     direction: rtl;
     max-height: 200px;
     overflow-y: auto;
-    font-family: 'Noto Sans Hebrew', 'Segoe UI', sans-serif;
+    font-family: 'Noto Sans Hebrew', sans-serif;
     background: var(--bg-main);
     color: var(--text-default);
     padding: 16px;
@@ -134,11 +141,12 @@ h2 {
     color: #ffffff;
     border: none;
     border-radius: 6px;
-    padding: 10px 28px;
+    padding: 8px 20px;
     font-weight: 600;
     cursor: pointer;
     transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
     box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    font-size: 0.95em;
 }
 
 .button:hover,
@@ -148,33 +156,32 @@ h2 {
     box-shadow: 0 4px 16px rgba(0,0,0,0.6);
 }
 
-/* Responsive fallback for mobile */
+/* Mobile Responsive */
 @media (max-width: 600px) {
+    .container {
+        margin: 10px;
+        padding: 20px;
+    }
+
     .verse-form {
         flex-direction: column;
-        align-items: stretch;
+        gap: 12px;
     }
 
-    .form-group input[type="number"],
+    .form-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .form-group input,
     .form-group select {
-        width: 100%; /* full-width for touch */
+        flex: 1;
+        max-width: 100%;
     }
 
     .button {
-        width: 100%; /* large tap target */
-    }
-}
-
-/* Desktop refinements */
-@media (min-width: 900px) {
-    .form-group input[type="number"] {
-        max-width: 60px;
-        padding: 3px 6px;
-        font-size: 0.9em;
-    }
-
-    .button {
-        padding: 8px 20px;
-        font-size: 0.95em;
+        width: 100%;
+        padding: 12px;
+        font-size: 1em;
     }
 }
