@@ -116,6 +116,8 @@ h2 {
 /* Hebrew text box */
 .hebrew-box {
     direction: rtl;
+    max-height: 200px;
+    overflow-y: auto;
     font-family: 'Noto Sans Hebrew', 'Segoe UI', sans-serif;
     background: var(--bg-main);
     color: var(--text-default);
@@ -146,10 +148,33 @@ h2 {
     box-shadow: 0 4px 16px rgba(0,0,0,0.6);
 }
 
-/* Responsive fallback */
+/* Responsive fallback for mobile */
 @media (max-width: 600px) {
     .verse-form {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    .form-group input[type="number"],
+    .form-group select {
+        width: 100%; /* full-width for touch */
+    }
+
+    .button {
+        width: 100%; /* large tap target */
+    }
+}
+
+/* Desktop refinements */
+@media (min-width: 900px) {
+    .form-group input[type="number"] {
+        max-width: 60px;
+        padding: 3px 6px;
+        font-size: 0.9em;
+    }
+
+    .button {
+        padding: 8px 20px;
+        font-size: 0.95em;
     }
 }
