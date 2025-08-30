@@ -1,0 +1,155 @@
+/* Core Colors (VS Code Dark+ inspired) */
+:root {
+    --bg-main: #1e1e1e;
+    --bg-panel: #252526;
+    --bg-input: #3c3c3c;
+    --text-default: #d4d4d4;
+    --text-muted: #808080;
+    --accent-blue: #007acc;
+    --accent-blue-hover: #1177bb;
+    --border-gray: #3c3c3c;
+}
+
+/* General */
+body {
+    background: var(--bg-main);
+    color: var(--text-default);
+    margin: 0;
+    font-family: 'Segoe UI', Consolas, 'Courier New', monospace;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: var(--bg-panel);
+    border-radius: 8px;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.35);
+    padding: 48px 40px;
+}
+
+/* Title */
+.title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2.8em;
+    font-weight: 600;
+    color: var(--accent-blue);
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}
+
+/* Navigation */
+nav a {
+    display: inline-block;
+    padding: 10px 18px;
+    margin: 0 8px;
+    color: var(--text-default);
+    background: var(--bg-input);
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+nav a:hover,
+nav a:focus {
+    background: var(--accent-blue);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,122,204,0.4);
+}
+
+/* Headings */
+h2 {
+    color: var(--text-default);
+    font-family: inherit;
+}
+
+/* Verse Selection Form */
+.verse-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg-input);
+    padding: 6px 10px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+.form-group label {
+    font-weight: 500;
+    color: var(--text-default);
+    margin-right: 4px;
+}
+
+.form-group select,
+.form-group input {
+    background: var(--bg-main);
+    border: 1px solid var(--border-gray);
+    border-radius: 4px;
+    padding: 4px 8px;
+    color: var(--text-default);
+    font-size: 0.95em;
+    min-width: 70px;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 6px rgba(0,122,204,0.5);
+    outline: none;
+}
+
+.form-group .dash {
+    color: var(--text-muted);
+    font-weight: bold;
+}
+
+/* Hebrew text box */
+.hebrew-box {
+    direction: rtl;
+    font-family: 'Noto Sans Hebrew', 'Segoe UI', sans-serif;
+    background: var(--bg-main);
+    color: var(--text-default);
+    padding: 16px;
+    border-radius: 6px;
+    border: 1px solid var(--border-gray);
+    overflow-x: auto;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Button */
+.button {
+    background: var(--accent-blue);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 28px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.button:hover,
+.button:focus {
+    background: var(--accent-blue-hover);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+}
+
+/* Responsive fallback */
+@media (max-width: 600px) {
+    .verse-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

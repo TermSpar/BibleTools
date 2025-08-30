@@ -4,30 +4,67 @@
     <meta charset="UTF-8">
     <title>Bible Tools Project - Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background: #f9f9f9; }
-        header { margin-bottom: 30px; }
-        h1 { color: #2c3e50; }
-        nav a { margin-right: 15px; color: #2980b9; text-decoration: none; }
-        nav a:hover { text-decoration: underline; }
-        main { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px #eee; }
-    </style>
+    <!-- Fonts: Bible-like title font + clean system font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Bible Tools Project</h1>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">Features</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-        </nav>
-    </header>
-    <main>
-        <h2>Welcome!</h2>
-        <p>
-            This is the home page for the Bible Tools Project. Explore features and resources to help you study and understand the Bible more effectively.
-        </p>
-    </main>
+    <div class="container">
+        <header>
+            <h1 class="title">Bible Tools Project</h1>
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">Features</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+        </header>
+
+        <main>
+            <h2>Gematria Tool</h2>
+            <p>
+                This is a tool that allows you to calculate the gematria values of not just individual words, but even entire passages, chapters, and books of the Hebrew Bible.
+            </p>
+            <form id="gematria-form" class="verse-form">
+                <div class="form-group">
+                    <label for="book-select">Book:</label>
+                    <select id="book-select" name="book">
+                        <option value="Genesis">Genesis</option>
+                        <option value="Exodus">Exodus</option>
+                        <option value="Leviticus">Leviticus</option>
+                        <option value="Numbers">Numbers</option>
+                        <option value="Deuteronomy">Deuteronomy</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="chapter-select">Chapter:</label>
+                    <input type="number" id="chapter-select" name="chapter" min="1" value="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="verse-start">Verse:</label>
+                    <input type="number" id="verse-start" name="verse-start" min="1" value="1">
+                    <span class="dash">–</span>
+                    <input type="number" id="verse-end" name="verse-end" min="1" value="1">
+                </div>
+
+                <button type="button" class="button" onclick="loadHebrewText()">Show Hebrew Text</button>
+            </form>
+
+            <div id="hebrew-text-container" style="margin-top: 1em;">
+                <pre id="hebrew-text" class="hebrew-box">
+<!-- Hebrew text will be displayed here -->
+                </pre>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function loadHebrewText() {
+            document.getElementById('hebrew-text').textContent =
+                'בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ';
+        }
+    </script>
 </body>
 </html>
