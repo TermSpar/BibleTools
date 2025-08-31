@@ -26,7 +26,7 @@
         <main>
             <h2>Gematria Tool</h2>
             <p>
-                This is a tool that allows you to calculate the gematria values of not just individual words, but even entire passages, chapters, and books of the Hebrew Bible.
+                This is a tool that allows you to calculate the gematria values of entire passages, chapters, and books of the Hebrew Bible.
             </p>
             <form id="gematria-form" class="verse-form">
                 <div class="form-group">
@@ -52,12 +52,22 @@
                     <input type="number" id="verse-end" name="verse-end" min="1" value="1">
                 </div>
 
-                <button type="button" class="button" onclick="loadHebrewText()">Show Hebrew Text</button>
+                <button type="button" class="button" onclick="loadSelectedTexts()">Calculate</button>
             </form>
 
+            <div id="gematria-value-label" style="margin-top: 1em; font-weight: bold;">
+                Gematria Value: -
+            </div>
+            
             <div id="hebrew-text-container" style="margin-top: 1em;">
                 <pre id="hebrew-text" class="hebrew-box">
                     <!-- Hebrew text will be displayed here -->
+                </pre>
+            </div>
+
+             <div id="english-text-container" style="margin-top: 1em;">
+                <pre id="english-text" class="english-box">
+                    <!-- English text will be displayed here -->
                 </pre>
             </div>
         </main>
