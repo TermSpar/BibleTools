@@ -1,10 +1,9 @@
 export function getBookChapterVerse() {
-    const book = document.getElementById('book-select').value;
-    const chapter = document.getElementById('chapter-select').value;
-    const verseStart = document.getElementById('verse-start').value;
-    const verseEnd = document.getElementById('verse-end').value;
+    const book = getValue("book-select");
+    const startCV = getValue("start-select");
+    const endCV = getValue("end-select");
 
-    return { book, chapter, verseStart, verseEnd };
+    return { book, startCV, endCV };
 }
 
 export function setTextContent(id, text) {
@@ -17,24 +16,4 @@ export function getTextContent(id) {
 
 export function getValue(id) {
     return document.getElementById(id).value;
-}
-
-export function getStartCVOptions() {
-    const select = document.getElementById('start-select');
-    fetch("bible/Genesis.txt")
-        .then(response => response.text())
-        .then(text => {
-            const lines = text.split("\n");
-            lines.forEach(line => {
-                const match = line.match(/^\s*\d+:\d+/);
-                if (match) {
-                    const cv = match[0];
-                    let option = document.createElement('option');
-                    option.value = cv;
-                    option.textContent = cv;
-                    select.appendChild(option);
-                }
-            });
-        })
-        .catch(err => console.error(err));
 }

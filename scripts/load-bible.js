@@ -8,6 +8,7 @@ function extractRangeInclusive(text, startRef, endRef) {
         throw new Error("Could not find one of the references.");
     }
 
+    // don't want to include the next C:V pair
     const afterEnd = text.indexOf(":", endIndex + endRef.length);
     const cutIndex = afterEnd === -1 ? text.length : afterEnd - 1;
 
@@ -15,16 +16,14 @@ function extractRangeInclusive(text, startRef, endRef) {
 }
 
 export function loadHebrewText(callback) {
-    const { book, chapter, verseStart, verseEnd } = getBookChapterVerse();
-    const vs_formatted = ` ${chapter}:${verseStart} `;
-    const ve_formatted = ` ${chapter}:${verseEnd} `;
+    const { book, startCV, endCV } = getBookChapterVerse();
     fetch(`bible/${book}.txt`)
         .then(response => response.text())
         .then(text => {
             setTextContent('hebrew-text', extractRangeInclusive (
-                text, 
-                vs_formatted, 
-                ve_formatted
+                text,
+                startCV,
+                endCV
             ));
             if (callback) callback();
         })
@@ -32,16 +31,14 @@ export function loadHebrewText(callback) {
 }
 
 export function loadEnglishText() {
-    const { book, chapter, verseStart, verseEnd } = getBookChapterVerse();
-    const vs_formatted = ` ${chapter}:${verseStart} `;
-    const ve_formatted = ` ${chapter}:${verseEnd} `;
+    const { book, startCV, endCV } = getBookChapterVerse();
     fetch(`bible/${book}-en.txt`)
         .then(response => response.text())
         .then(text => {
             setTextContent('english-text', extractRangeInclusive (
                 text, 
-                vs_formatted, 
-                ve_formatted
+                startCV, 
+                endCV
             ));
         })
         .catch(err => console.error(err));
