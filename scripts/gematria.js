@@ -2,6 +2,8 @@ import { setTextContent, getTextContent, getValue } from "./dom-utils.js ";
 import { loadHebrewText, loadEnglishText } from "./load-bible.js";
 
 export function calculateGematriaValue(){
+    // the function below is the callback for loadHebrewText
+    // needed this because of async stuff
     loadHebrewText(() => {
         const hebrewText = getTextContent('hebrew-text');
         const gematriaType = getValue('gematria-type');

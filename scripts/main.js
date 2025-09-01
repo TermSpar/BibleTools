@@ -1,12 +1,22 @@
 import { calculateGematriaValue } from "./gematria.js";
-import { getStartCVOptions } from "./dom-utils.js";
+import { getStartCVOptions, getEndCVOptions } from "./auto-fill.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("calculate-button");
     btn.addEventListener("click", calculateGematriaValue);
 });
 
-document.addEventListener("DOMContentLoaded", getStartCVOptions);
-
 const bibleBookField = document.getElementById("book-select");
-bibleBookField.addEventListener("change", getStartCVOptions);
+document.addEventListener("DOMContentLoaded", () => {
+    getStartCVOptions(bibleBookField.value);
+});
+bibleBookField.addEventListener("change", () => {
+    const selectedBook = bibleBookField.value;
+    getStartCVOptions(selectedBook);
+});
+
+const startCVField = document.getElementById("start-select");
+startCVField.addEventListener("change", () => {
+    const selectedBook = bibleBookField.value;
+    getEndCVOptions(selectedBook);
+});
