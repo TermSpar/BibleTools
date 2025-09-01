@@ -10,6 +10,7 @@ function extractRangeInclusive(text, startRef, endRef) {
 
     // don't want to include the next C:V pair
     const afterEnd = text.indexOf(":", endIndex + endRef.length);
+    //     const afterEnd = text.slice(endIndex + endRef.length).search(/\d+:\d+/); ?
     const cutIndex = afterEnd === -1 ? text.length : afterEnd - 1;
 
     return text.slice(startIndex, cutIndex);

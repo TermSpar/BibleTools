@@ -1,22 +1,26 @@
 import { calculateGematriaValue } from "./gematria.js";
 import { getStartCVOptions, getEndCVOptions } from "./auto-fill.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("calculate-button");
-    btn.addEventListener("click", calculateGematriaValue);
-});
-
 const bibleBookField = document.getElementById("book-select");
-document.addEventListener("DOMContentLoaded", () => {
-    getStartCVOptions(bibleBookField.value);
-});
-bibleBookField.addEventListener("change", () => {
-    const selectedBook = bibleBookField.value;
-    getStartCVOptions(selectedBook);
+const startCVField = document.getElementById("start-select");
+const calculateBtn = document.getElementById("calculate-button");
+
+// initialize the app once the DOM is ready
+document.addEventListener("DOMContentLoaded", async () => {
+    calculateBtn.addEventListener("click", calculateGematriaValue);
+
+    await getStartCVOptions(bibleBookField.value);
+
+    await getEndCVOptions(bibleBookField.value);
 });
 
-const startCVField = document.getElementById("start-select");
-startCVField.addEventListener("change", () => {
-    const selectedBook = bibleBookField.value;
-    getEndCVOptions(selectedBook);
+// when the book changes, repopulate start (and then end)
+bibleBookField.addEventListener("change", async () => {
+    await getStartCVOptions(bibleBookField.value);
+    await getEndCVOptions(bibleBookField.value);
+});
+
+// when the start CV changes, update the end options
+startCVField.addEventListener("change", async () => {
+    await getEndCVOptions(bibleBookField.value);
 });
