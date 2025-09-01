@@ -8,12 +8,13 @@ function extractRangeInclusive(text, startRef, endRef) {
         throw new Error("Could not find one of the references.");
     }
 
-    // don't want to include the next C:V pair
-    const afterEnd = text.indexOf(":", endIndex + endRef.length);
-    //     const afterEnd = text.slice(endIndex + endRef.length).search(/\d+:\d+/); ?
-    const cutIndex = afterEnd === -1 ? text.length : afterEnd - 1;
+    // this will find the absolute index of the next C:V pair
+    const regex = /\d+:\d+/g; // g = global so we can use lastIndex
+    regex.lastIndex = endIndex + endRef.length;
+    const match = regex.exec(text);
+    const afterEnd = match ? match.index : -1;
 
-    return text.slice(startIndex, cutIndex);
+    return text.slice(startIndex, afterEnd);
 }
 
 export function loadHebrewText(callback) {
