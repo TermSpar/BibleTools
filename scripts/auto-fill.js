@@ -49,6 +49,11 @@ export async function getEndCVOptions(book) {
     const select = document.getElementById('end-select');
     const cvs = await loadCVs(book);
 
+    const currentEnd = getValue('end-select');
+    const currentEndIndex = cvs.indexOf(currentEnd);
+
+    select.innerHTML = "";
+
     // make it so the only options are after the startIndex
     // if no startIndex, just give the full list
     const startIndex = cvs.indexOf(startCV);
@@ -63,4 +68,8 @@ export async function getEndCVOptions(book) {
     });
 
     select.appendChild(fragment);
+
+    if (currentEndIndex > startIndex) {
+        select.value = currentEnd;
+    }
 }
