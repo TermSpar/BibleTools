@@ -19,22 +19,59 @@ export function getValue(id) {
     return document.getElementById(id).value;
 }
 
-export function getStartCVOptions() {
-    const select = document.getElementById('start-select');
-    fetch("bible/Genesis.txt")
-        .then(response => response.text())
-        .then(text => {
-            const lines = text.split("\n");
-            lines.forEach(line => {
-                const match = line.match(/^\s*\d+:\d+/);
-                if (match) {
-                    const cv = match[0];
-                    let option = document.createElement('option');
-                    option.value = cv;
-                    option.textContent = cv;
-                    select.appendChild(option);
-                }
-            });
+let cvList = []; // cache
+
+async function loadCVs() {
+    if (cvList.length > 0) return cvList;
+
+    const response = await fetch("bible/Genesis.txt");
+    const text = await response.text();
+    const lines = text.split("\n");
+
+    cvList = lines
+        .map(line => {
+            const match = line.match(/^\s*\d+:\d+/);
+            return match ? match[0] : null;
         })
-        .catch(err => console.error(err));
+        .filter(Boolean); 
+
+    return cvList;
+}
+
+export async function getStartCVOptions() {
+    const select = document.getElementById('start-select');
+    const cvs = await loadCVs();
+
+    select.innerHTML = "";
+
+    const fragment = document.createDocumentFragment();
+    cvs.forEach(cv => {
+        const option = document.createElement('option');
+        option.value = cv;
+        option.textContent = cv;
+        fragment.appendChild(option);
+    });
+
+    select.appendChild(fragment);
+}
+
+export async function getEndCVOptions() {
+    const startCV = getTextContent('start-select');
+    const select = document.getElementById('end-select');
+    const cvs = await loadCVs();
+
+    select.innerHTML = "";
+
+    const startIndex = cvs.indexOf(startCV);
+    const filtered = startIndex >= 0 ? cvs.slice(startIndex + 1) : cvs;
+
+    const fragment = document.createDocumentFragment();
+    filtered.forEach(cv => {
+        const option = document.createElement('option');
+        option.value = cv;
+        option.textContent = cv;
+        fragment.appendChild(option);
+    });
+
+    select.appendChild(fragment);
 }
