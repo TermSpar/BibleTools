@@ -18,3 +18,23 @@ export function getTextContent(id) {
 export function getValue(id) {
     return document.getElementById(id).value;
 }
+
+export function getStartCVOptions() {
+    const select = document.getElementById('start-select');
+    fetch("bible/Genesis.txt")
+        .then(response => response.text())
+        .then(text => {
+            const lines = text.split("\n");
+            lines.forEach(line => {
+                const match = line.match(/^\s*\d+:\d+/);
+                if (match) {
+                    const cv = match[0];
+                    let option = document.createElement('option');
+                    option.value = cv;
+                    option.textContent = cv;
+                    select.appendChild(option);
+                }
+            });
+        })
+        .catch(err => console.error(err));
+}
