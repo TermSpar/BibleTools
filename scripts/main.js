@@ -1,5 +1,5 @@
 import { calculateGematriaValue } from "./gematria.js";
-import { getStartCVOptions, getEndCVOptions } from "./auto-fill.js";
+import { getStartCVOptions, getEndCVOptions, bookChange } from "./auto-fill.js";
 
 const bibleBookField = document.getElementById("book-select");
 const startCVField = document.getElementById("start-select");
@@ -16,8 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // when the book changes, repopulate start (and then end)
 bibleBookField.addEventListener("change", async () => {
-    await getStartCVOptions(bibleBookField.value);
-    await getEndCVOptions(bibleBookField.value);
+    bookChange(bibleBookField.value);
 });
 
 // when the start CV changes, update the end options

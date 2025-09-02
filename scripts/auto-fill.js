@@ -73,3 +73,9 @@ export async function getEndCVOptions(book) {
         select.value = currentEnd;
     }
 }
+
+export async function bookChange(book) {
+    cvList = []; // clear the cache
+    await getStartCVOptions(book);
+    await getEndCVOptions(book);
+}
